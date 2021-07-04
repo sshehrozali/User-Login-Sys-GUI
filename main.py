@@ -1,19 +1,60 @@
-def CreateUser():
+# def Create():
+#     class NewUser:
+
+#         # Initialization
+#         def __init__(self, FirstName, LastName, PhoneNumber, EmailAddress, Password):
+#             self.Firstname = FirstName
+#             self.Lastname = LastName
+#             self.Number = PhoneNumber
+#             self.Email = EmailAddress
+#             self.Password = Password
+        
+#         ## GETTER METHODS ##
+#         def firstname(self):
+#             return self.Firstname
+
+#         def lastname(self):
+#             return self.Lastname
+
+#         def number(self):
+#             return self.Number
+
+#         def email(self):
+#             return self.Email
+
+#         def password(self):
+#             return self.Password
+
+#     print(f"First Name: {first.get()}")
+
+def Register():
+
+    def Create():
+        first_Name = firstname_var.get()
+        print(first_Name)
 
     ## CREATES A NEW WINDOW ##
     CreateUserWindow = tkinter.Tk()
-    CreateUserWindow.geometry("400x500")
+    CreateUserWindow.geometry("700x500")
     CreateUserWindow.title("Create New Account")
     CreateUserWindow.configure(bg="#1a2021")
 
     ## HEADING ##
-    CreateUserHeadingLabel = tkinter.Label(CreateUserWindow, text="Register your Account", fg="white", bg="#1a2021", font=("Open Sans", 26), anchor="center")
-    CreateUserHeadingLabel.grid(row=0)
+    CreateUserHeadingLabel = tkinter.Label(CreateUserWindow, text="Register your Account", fg="white", bg="#1a2021", font=("Open Sans", 26), anchor="center")    
+    CreateUserHeadingLabel.grid(pady=20)
+
+    # Declares variables for entry boxes
+    firstname_var = tkinter.StringVar()
+    lastname_var = tkinter.StringVar()
+    number_var = tkinter.StringVar()
+    email_var = tkinter.StringVar()
+    password_var = tkinter.StringVar()
+    confirmpassword_var = tkinter.StringVar()
 
     ## FIRST NAME FIELD ##
     FirstName_Label = tkinter.Label(CreateUserWindow, text="First Name", fg="white", bg="#1a2021", font=("Open Sans", 12))
     FirstName_Label.grid(column=0, row=1)
-    FirstName_Input = tkinter.Entry(CreateUserWindow)
+    FirstName_Input = tkinter.Entry(CreateUserWindow, textvariable=firstname_var)
     FirstName_Input.grid(column=1, row=1)
 
     ## LAST NAME FIELD ##
@@ -34,11 +75,23 @@ def CreateUser():
     EmailAddress_Input = tkinter.Entry(CreateUserWindow)
     EmailAddress_Input.grid(column=1, row=4)
 
-    ## NEW PASSWOR FIELD ##
+    ## NEW PASSWORD FIELD ##
     Password_Label = tkinter.Label(CreateUserWindow, text="New Password", fg="white", bg="#1a2021", font=("Open Sans", 12))
     Password_Label.grid(column=0, row=5)
     Password_Input = tkinter.Entry(CreateUserWindow)
     Password_Input.grid(column=1, row=5)
+
+    ## CONFIRM PASSWORD FIELD ##
+    ConfirmPassword_Label = tkinter.Label(CreateUserWindow, text="New Password", fg="white", bg="#1a2021", font=("Open Sans", 12))
+    ConfirmPassword_Label.grid(column=0, row=5)
+    ConfirmPassword_Input = tkinter.Entry(CreateUserWindow)
+    ConfirmPassword_Input.grid(column=1, row=5)
+    
+
+    Create_Btn = tkinter.Button(CreateUserWindow, text="Register", width=20, command=Create).grid(pady=30)    # Create new account button
+
+
+
 
 
 import tkinter                      # Import Tkinter Library
@@ -52,22 +105,16 @@ window.configure(bg="#1a2021")      # Set main window BG color
 Title_Label = tkinter.Label(window, text="User Login System", fg="white", bg="#1a2021", font=("Open Sans", 26))
 Title_Label.pack(pady=20)
 
+## CREATES LOGIN FIELD NAME WITH INPUT ##
+Login_FieldNames = ["Email Address", "Password"]
+for fieldnames in Login_FieldNames:
+    Name = tkinter.Label(window, text=fieldnames, fg="white", bg="#1a2021", font=("Open Sans", 12)).pack()
+    Input = tkinter.Entry(window).pack()
 
-
-## EMAIL FIELD ##
-UserEmail = tkinter.Label(window, text="Email Address", fg="white", bg="#1a2021", font=("Open Sans", 12)).pack()
-UserEmailInput = tkinter.Entry(window).pack()
-
-## PASSWORD FIELD ##
-UserPassword = tkinter.Label(window, text="Password", fg="white", bg="#1a2021", font=("Open Sans", 12)).pack()
-UserPasswordInput = tkinter.Entry(window).pack()
-
-# LOGIN BUTTON
+## LOGIN BUTTON ##
 Login_Btn = tkinter.Button(text="Login").pack(pady=20)
 
-
-
 ## CREATE NEW USER BUTTON ##
-Create_User_Btn = tkinter.Button(text="Sign Up", command=CreateUser).pack()
+Create_User_Btn = tkinter.Button(text="Create Account", command=Register).pack()
 
 window.mainloop()   # Creates main window loop
