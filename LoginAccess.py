@@ -3,8 +3,11 @@ import hashlib
 import sqlite3
 from id_generator import make_id
 
-def CreateNewAccount(first, last, number, email, password):
-    
+def Login():
+
+    email = "ali123@gmail.com"
+    password = "helloworld"
+
     # Filename for .db file [CHANGE HERE]
     db_name = "data"
     db_name1 = "login"
@@ -30,14 +33,21 @@ def CreateNewAccount(first, last, number, email, password):
     # Encrypt Password (SHA224)
     encrypted = hashlib.sha224(password.encode())
 
-    # Generate NEW USER ID
-    user_id = make_id(db_name, table1)
+    # SELECT "PASSWORD" of that "EMAIL ID"
+    user_id = cursor.execute(f"SELECT Password from {table2} WHERE Email = ?", (email, encrypted.hexdigest()))
+    
+    # Fetch response
+    user_check = user_id.fetchone()
 
-    # Insert "BIO-DATA"
-    cursor.execute(f"INSERT INTO {table1} (ID, First_name, Last_name, Phone) VALUES(?, ?, ?, ?)", (user_id, first, last, number))
-    connection.commit()
+    if user_check != None:
+        
+        # If Password matches
+        if encrypted.hexdigest() == user_check[0]:
+            
+            # Get First and Last name of USER
+            info = cursor.execute(f"SELECT First_name, Last_name from {table1} WHERE ID = (SELECT ID from {table2} WHERE Email = ? AND Password = ?)", (email, encrypted.hexdigest()))
 
-    # Insert "LOGIN-ID"
-    cursor.execute(f"INSERT INTO {table2} (ID, Email, Password) VALUES(?, ?, ?)", (user_id, email, encrypted.hexdigest()))
-    connection.commit()
-    print("\nUSER CREATED SUCCESSFULLY\n")
+            # Fetch response
+            user_info = info.fetchall()
+
+            print("Logged In")

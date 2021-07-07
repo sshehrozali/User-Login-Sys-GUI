@@ -1,37 +1,48 @@
-# def Create():
-#     class NewUser:
-
-#         # Initialization
-#         def __init__(self, FirstName, LastName, PhoneNumber, EmailAddress, Password):
-#             self.Firstname = FirstName
-#             self.Lastname = LastName
-#             self.Number = PhoneNumber
-#             self.Email = EmailAddress
-#             self.Password = Password
-        
-#         ## GETTER METHODS ##
-#         def firstname(self):
-#             return self.Firstname
-
-#         def lastname(self):
-#             return self.Lastname
-
-#         def number(self):
-#             return self.Number
-
-#         def email(self):
-#             return self.Email
-
-#         def password(self):
-#             return self.Password
-
-#     print(f"First Name: {first.get()}")
-
+# Funtion to open Create New Account Window
 def Register():
 
+    # Function to create New User Account
     def Create():
-        first_Name = firstname_var.get()
-        print(first_Name)
+
+        # Class for New User
+        class NewUser:
+            # Initialization
+            def __init__(self, FirstName, LastName, PhoneNumber, EmailAddress, Password):
+                self.Firstname = FirstName
+                self.Lastname = LastName
+                self.Number = PhoneNumber
+                self.Email = EmailAddress
+                self.Password = Password
+            
+            ## GETTER METHODS ##
+            def firstname(self):
+                return self.Firstname
+
+            def lastname(self):
+                return self.Lastname
+
+            def number(self):
+                return self.Number
+
+            def email(self):
+                return self.Email
+
+            def password(self):
+                return self.Password
+
+        # Create New User instance
+        NewUserObj = NewUser("Ali", "Siddiqui", "033345678921", "ali123@gmail.com", "helloworld")
+
+        # Call methods
+        FIRSTNAME = NewUserObj.firstname()
+        LASTNAME = NewUserObj.lastname()
+        NUMBER = NewUserObj.number()
+        EMAIL = NewUserObj.email()
+        PASSWORD = NewUserObj.password()
+
+        # PASSING THESE VALUES TO CreateNewAccount()
+        CreateNewAccount(FIRSTNAME, LASTNAME, NUMBER, EMAIL, PASSWORD)
+
 
     ## CREATES A NEW WINDOW ##
     CreateUserWindow = tkinter.Tk()
@@ -42,7 +53,7 @@ def Register():
     ## HEADING ##
     CreateUserHeadingLabel = tkinter.Label(CreateUserWindow, text="Register your Account", fg="white", bg="#1a2021", font=("Open Sans", 26), anchor="center")    
     CreateUserHeadingLabel.grid(pady=20)
-
+    
     # Declares variables for entry boxes
     firstname_var = tkinter.StringVar()
     lastname_var = tkinter.StringVar()
@@ -87,14 +98,16 @@ def Register():
     ConfirmPassword_Input = tkinter.Entry(CreateUserWindow)
     ConfirmPassword_Input.grid(column=1, row=5)
     
-
     Create_Btn = tkinter.Button(CreateUserWindow, text="Register", width=20, command=Create).grid(pady=30)    # Create new account button
 
 
 
-
-
-import tkinter                      # Import Tkinter Library
+####################
+ ## MAIN PROGRAM ##
+####################   
+import tkinter                              # Import Tkinter Library
+from CreateUser import CreateNewAccount     # Import CreateNewAccount() -> func
+from LoginAccess import Login               # Import Login() -> func
 
 window = tkinter.Tk()               # Creates main window object
 window.geometry("400x300")          # Set window height and width
@@ -112,7 +125,7 @@ for fieldnames in Login_FieldNames:
     Input = tkinter.Entry(window).pack()
 
 ## LOGIN BUTTON ##
-Login_Btn = tkinter.Button(text="Login").pack(pady=20)
+Login_Btn = tkinter.Button(text="Login", command=Login).pack(pady=20)
 
 ## CREATE NEW USER BUTTON ##
 Create_User_Btn = tkinter.Button(text="Create Account", command=Register).pack()
