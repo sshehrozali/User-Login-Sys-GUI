@@ -2,6 +2,7 @@
 import hashlib
 import sqlite3
 from id_generator import make_id
+from USER_DASHBOARD import access_granted
 
 def Login():
 
@@ -34,7 +35,7 @@ def Login():
     encrypted = hashlib.sha224(password.encode())
 
     # SELECT "PASSWORD" of that "EMAIL ID"
-    user_id = cursor.execute(f"SELECT Password from {table2} WHERE Email = ?", (email, encrypted.hexdigest()))
+    user_id = cursor.execute(f"SELECT Password from {table2} WHERE Email = ?", (email, ))
     
     # Fetch response
     user_check = user_id.fetchone()
@@ -50,4 +51,11 @@ def Login():
             # Fetch response
             user_info = info.fetchall()
 
+            # Generates Complete Name of the User
+            generatedUserName = ""
+            for info in user_info[0]:
+                generatedUserName += info
+                generatedUserName += " "    # Append empty space
+
             print("Logged In")
+            access_granted(generatedUserName)   # Pass username to access_granted()
