@@ -1,4 +1,7 @@
 # Funtion to open Create New Account Window
+from tkinter import font
+
+
 def Register():
 
     # Function to create New User Account
@@ -43,6 +46,9 @@ def Register():
         # PASSING THESE VALUES TO CreateNewAccount()
         CreateNewAccount(FIRSTNAME, LASTNAME, NUMBER, EMAIL, PASSWORD)
 
+        # Initiate the user about event went successful -> Append new label inside Register window
+        Created_Label = tkinter.Label(CreateUserWindow, text="Account Created successfully", bg="#1c1c21", fg="white", font=("Arial", 18))
+        Created_Label.grid()
 
     ## CREATES A NEW WINDOW ##
     CreateUserWindow = tkinter.Tk()
@@ -53,52 +59,19 @@ def Register():
     ## HEADING ##
     CreateUserHeadingLabel = tkinter.Label(CreateUserWindow, text="Register your Account", fg="white", bg="#1a2021", font=("Open Sans", 26), anchor="center")    
     CreateUserHeadingLabel.grid(pady=20)
-    
-    # Declares variables for entry boxes
-    firstname_var = tkinter.StringVar()
-    lastname_var = tkinter.StringVar()
-    number_var = tkinter.StringVar()
-    email_var = tkinter.StringVar()
-    password_var = tkinter.StringVar()
-    confirmpassword_var = tkinter.StringVar()
 
-    ## FIRST NAME FIELD ##
-    FirstName_Label = tkinter.Label(CreateUserWindow, text="First Name", fg="white", bg="#1a2021", font=("Open Sans", 12))
-    FirstName_Label.grid(column=0, row=1)
-    FirstName_Input = tkinter.Entry(CreateUserWindow, textvariable=firstname_var)
-    FirstName_Input.grid(column=1, row=1)
+    ## CREATE LABELS AND INPUTS FIELDS ##
+    rowCounter = 1  # Counter to count number of rows`  
+    labels = ["First Name", "Last Name", "Phone Number", "Email Address", "Password"]
+    for label in labels:
+        Label = tkinter.Label(CreateUserWindow, text=label, fg="white", bg="#1a2021", font=("Open Sans", 12)).grid(column=0, row=rowCounter)
+        Input = tkinter.Entry(CreateUserWindow).grid(column=1, row=rowCounter)
+        rowCounter += 1     # Increament row counter
 
-    ## LAST NAME FIELD ##
-    LastName_Label = tkinter.Label(CreateUserWindow, text="Last Name", fg="white", bg="#1a2021", font=("Open Sans", 12))
-    LastName_Label.grid(column=0, row=2)
-    LastName_Input = tkinter.Entry(CreateUserWindow)
-    LastName_Input.grid(column=1, row=2)
-
-    ## PHONE NUMBER FIELD ##
-    PhoneNumber_Label = tkinter.Label(CreateUserWindow, text="Phone Number", fg="white", bg="#1a2021", font=("Open Sans", 12))
-    PhoneNumber_Label.grid(column=0, row=3)
-    PhoneNumber_Input = tkinter.Entry(CreateUserWindow)
-    PhoneNumber_Input.grid(column=1, row=3)
-
-    ## EMAIL ADDRESS FIELD ##
-    EmailAddress_Label = tkinter.Label(CreateUserWindow, text="Email Address", fg="white", bg="#1a2021", font=("Open Sans", 12))
-    EmailAddress_Label.grid(column=0, row=4)
-    EmailAddress_Input = tkinter.Entry(CreateUserWindow)
-    EmailAddress_Input.grid(column=1, row=4)
-
-    ## NEW PASSWORD FIELD ##
-    Password_Label = tkinter.Label(CreateUserWindow, text="New Password", fg="white", bg="#1a2021", font=("Open Sans", 12))
-    Password_Label.grid(column=0, row=5)
-    Password_Input = tkinter.Entry(CreateUserWindow)
-    Password_Input.grid(column=1, row=5)
-
-    ## CONFIRM PASSWORD FIELD ##
-    ConfirmPassword_Label = tkinter.Label(CreateUserWindow, text="New Password", fg="white", bg="#1a2021", font=("Open Sans", 12))
-    ConfirmPassword_Label.grid(column=0, row=5)
-    ConfirmPassword_Input = tkinter.Entry(CreateUserWindow)
-    ConfirmPassword_Input.grid(column=1, row=5)
-    
+    # Create New Account Button    
     Create_Btn = tkinter.Button(CreateUserWindow, text="Register", width=20, command=Create).grid(pady=30)    # Create new account button
+
+
 
 
 

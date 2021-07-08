@@ -41,3 +41,5 @@ def CreateNewAccount(first, last, number, email, password):
     cursor.execute(f"INSERT INTO {table2} (ID, Email, Password) VALUES(?, ?, ?)", (user_id, email, encrypted.hexdigest()))
     connection.commit()
     print("\nUSER CREATED SUCCESSFULLY\n")
+
+    
